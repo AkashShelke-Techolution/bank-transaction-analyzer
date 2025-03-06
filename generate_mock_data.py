@@ -45,7 +45,14 @@ for _ in range(num_transactions):
     transaction_date = fake.date_between(start_date="-1y", end_date="today")  # Last year to today
     amount = round(random.uniform(5, 500), 2)  # Random amount between 5 and 500
     category_id = random.choice(categories)  # Random category
-    description = fake.sentence(nb_words=6)  # Random short description
+    descriptions = [
+    "Grocery shopping at Coop", "Rent payment", "Electricity bill", "Netflix subscription",
+    "Train ticket to Zürich", "Coffee at Starbucks", "Dinner at a restaurant",
+    "Car fuel at Shell", "Gym membership renewal", "Medical insurance payment",
+    "Online shopping on Amazon", "Spotify Premium subscription", "Tax payment",
+    "Flight booking to Berlin", "Credit card fee", "Salary deposit", "Withdraw from ATM",
+    "Phone bill payment", "Home maintenance services", "Bookstore purchase"
+] # Inserts meaningful descriptions of payment purposes
 
     transactions.append((transaction_date, amount, category_id, description))
 
