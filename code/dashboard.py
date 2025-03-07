@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-import numpy as np  # Force numpy load first
-import seaborn as sns
-import matplotlib
 import matplotlib.pyplot as plt
+import seaborn as sns
+from sqlalchemy import create_engine  
 
 # PostgreSQL Database Connection Settings
 DB_NAME = "bank_transaction_analyzer"
