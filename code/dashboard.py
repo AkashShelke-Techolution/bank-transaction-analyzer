@@ -6,8 +6,8 @@ from sqlalchemy import create_engine
 
 # PostgreSQL Database Connection Settings
 DB_NAME = "bank_transaction_analyzer"
-DB_USER = "postgres"
-DB_PASSWORD = "31011950"
+DB_USER = ""
+DB_PASSWORD = ""
 DB_HOST = "localhost"
 DB_PORT = "5432"
 
