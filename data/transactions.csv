@@ -5,7 +5,7 @@ transaction_date,amount,category_id,category_name,description
 2024-07-19,86.44,9,Other,Unexpected expense
 2024-06-06,374.4,7,Health & Fitness,Fitness abo at Holmes Place
 2024-12-25,323.66,9,Other,Gift purchase at Manor
-2024-12-30,183.75,4,Utilities,Gas bill
+2024-12-30,183.75,4,Utilities,Utilities bill
 2024-06-17,122.76,6,Dining,Lunch at Tibits
 2024-12-29,30.44,1,Groceries,Shopping at Coop
 2024-12-09,107.61,9,Other,Unexpected expense
