@@ -1,4 +1,4 @@
-transaction_date,amount,category_id,category_name,description
+id,transaction_date,amount,category_id,category_name,description
 115,2024-06-02,136.42,6,Coffee at Starbucks
 116,2024-12-28,423.96,2,Spotify Premium subscription
 117,2024-06-11,103.35,2,Credit card fee
