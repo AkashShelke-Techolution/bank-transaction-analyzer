@@ -1,10 +1,10 @@
-# 📌 Import necessary libraries
+# Import necessary libraries
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# ✅ Define CSV source (replace with your actual GitHub raw URL)
+# Define CSV source (replace with your actual GitHub raw URL)
 CSV_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/data/transactions.csv"
 
 @st.cache_data
@@ -18,17 +18,17 @@ def load_data():
         st.error(f"❌ Failed to load CSV: {e}")
         return pd.DataFrame()  # Return empty DataFrame on error
 
-# ✅ Load data
+# Load data
 df = load_data()
 
-# 📌 Streamlit UI
+# Streamlit UI
 st.title("💰 Bank Transaction Analyzer")
 
-# ✅ Display data in a table
+# Display data in a table
 if not df.empty:
     st.dataframe(df)
 
-    # 📌 Transactions Over Time
+    # Transactions Over Time
     st.subheader("📊 Transactions Over Time")
     fig, ax = plt.subplots(figsize=(10, 5))
     df.groupby(df["transaction_date"].dt.date)["amount"].sum().plot(
@@ -40,7 +40,7 @@ if not df.empty:
     ax.grid(True)
     st.pyplot(fig)
 
-    # 📌 Category-wise Spending
+    # Category-wise Spending
     st.subheader("📊 Spending by Category")
     if "category_name" in df.columns:
         fig, ax = plt.subplots(figsize=(8, 5))
