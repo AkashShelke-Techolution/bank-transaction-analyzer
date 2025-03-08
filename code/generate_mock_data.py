@@ -1,77 +1,61 @@
-import psycopg2
+import pandas as pd
 import random
 from faker import Faker
-from datetime import datetime, timedelta
 
-# Initialize Faker for random data
 fake = Faker()
 
-# PostgreSQL Database Connection Settings 
-DB_NAME = "bank_transaction_analyzer"
-DB_USER = "your_username"
-DB_PASSWORD = "your_password"
-DB_HOST = "localhost"
-DB_PORT = "5432"  # Default PostgreSQL port
+# Define category mapping (category_id → category_name)
+category_mapping = {
+    1: "Groceries",
+    2: "Entertainment",
+    3: "Transportation",
+    4: "Utilities",
+    5: "Shopping",
+    6: "Dining",
+    7: "Health & Fitness",
+    8: "Education",
+    9: "Other"
+}
 
-# Establishes Database Connection
-try:
-    conn = psycopg2.connect(
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST,
-        port=DB_PORT
-    )
-    cursor = conn.cursor()
-    print("Connected to the database successfully!")
+# Define meaningful descriptions
+category_descriptions = {
+    "Groceries": ["Shopping at Coop", "Shopping at Migros", "Buying fresh produce at Denner", "Organic food at Alnatura", "Weekly grocery shopping"],
+    "Entertainment": ["Cinema ticket at Pathé", "Concert ticket at Hallenstadion", "Netflix monthly subscription", "Zürich Opera House ticket", "Museum entry"],
+    "Transportation": ["Fill up car at Esso", "Fill up car at Shell", "Train ticket Zürich to Bern", "Tram pass renewal", "Halb-Tax (Swiss railway discount)"],
+    "Utilities": ["Electricity bill payment", "Swisscom internet subscription", "Mobile bill at Salt", "Gas bill", "Garbage collection fee"],
+    "Shopping": ["Clothing at H&M", "Electronics at Interdiscount", "Furniture shopping at IKEA", "New smartphone at Digitec", "Shoe shopping at Ochsner Sport"],
+    "Dining": ["Dinner at Vapiano", "Lunch at Tibits", "Coffee at Starbucks", "Fast food at McDonald's", "Weekend brunch at Sprüngli"],
+    "Health & Fitness": ["Fitness abo at Holmes Place", "Yoga class subscription", "Doctor consultation at MedBase", "Pharmacy purchase at Amavita", "Health insurance premium"],
+    "Education": ["Online course at Udemy", "University tuition fee", "Books purchase at Orell Füssli", "Software subscription for learning", "German language class"],
+    "Other": ["Charity donation", "Gift purchase at Manor", "Unexpected expense", "Bank service fee", "Car parking fee"]
+}
 
-except Exception as e:
-    print("Error connecting to the database:", e)
-    exit()
-
-# Retrieves category IDs from the database
-cursor.execute("SELECT category_id FROM categories;")
-categories = [row[0] for row in cursor.fetchall()]
-
-if not categories:
-    print("No categories found. Please insert categories first!")
-    exit()
-
-# Generates mock transactions
-num_transactions = 500
+# Generate mock transactions
 transactions = []
+for _ in range(50):  # Generate 50 transactions
+    transaction_date = fake.date_between(start_date="-1y", end_date="today")
+    category_id = random.randint(1, 9)
+    category_name = category_mapping[category_id]
+    
+    # Assign a relevant description from the category
+    description = random.choice(category_descriptions[category_name])
+    
+    # Assign a realistic amount based on category
+    if category_name in ["Groceries", "Dining", "Transportation"]:
+        amount = round(random.uniform(10, 150), 2)
+    elif category_name in ["Shopping", "Entertainment", "Health & Fitness"]:
+        amount = round(random.uniform(20, 500), 2)
+    elif category_name in ["Utilities", "Education"]:
+        amount = round(random.uniform(50, 300), 2)
+    else:
+        amount = round(random.uniform(5, 1000), 2)
 
-for _ in range(num_transactions):
-    transaction_date = fake.date_between(start_date="-1y", end_date="today")  # Last year to today
-    amount = round(random.uniform(5, 500), 2)  # Random amount between 5 and 500
-    category_id = random.choice(categories)  # Random category
-    descriptions = [
-    "Grocery shopping at Coop", "Rent payment", "Electricity bill", "Netflix subscription",
-    "Train ticket to Zürich", "Coffee at Starbucks", "Dinner at a restaurant",
-    "Car fuel at Shell", "Gym membership renewal", "Medical insurance payment",
-    "Online shopping on Amazon", "Spotify Premium subscription", "Tax payment",
-    "Flight booking to Berlin", "Credit card fee", "Salary deposit", "Withdraw from ATM",
-    "Phone bill payment", "Home maintenance services", "Bookstore purchase"
-] # Inserts meaningful descriptions of payment purposes
+    transactions.append([transaction_date, amount, category_id, category_name, description])
 
-    transactions.append((transaction_date, amount, category_id, description))
+# Create DataFrame
+df = pd.DataFrame(transactions, columns=["transaction_date", "amount", "category_id", "category_name", "description"])
 
-# Inserts generated transactions into the database
-insert_query = """
-    INSERT INTO transactions (transaction_date, amount, category_id, description)
-    VALUES (%s, %s, %s, %s);
-"""
+# Save as CSV
+df.to_csv("transactions.csv", index=False)
 
-try:
-    cursor.executemany(insert_query, transactions)
-    conn.commit()
-    print(f"{num_transactions} mock transactions inserted successfully!")
-
-except Exception as e:
-    conn.rollback()
-    print("Error inserting transactions:", e)
-
-# Close the connection
-cursor.close()
-conn.close()
-print("Database connection closed.")
+print("transactions.csv created successfully!")
