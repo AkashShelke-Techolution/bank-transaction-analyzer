@@ -1,4 +1,6 @@
 # Bank Transaction Analyzer
+**A finance transaction analyzer built with Streamlit, Pandas, and Seaborn for visualizing banking data.**
+
 
 A simple yet insightful dashboard built using **Python**, **Streamlit**, and **Pandas**, designed to help you analyze and visualize your bank transaction data with ease.
 
