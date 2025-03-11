@@ -56,15 +56,15 @@ To run this project locally:
 
 git clone https://github.com/oksanalim/bank-transaction-analyzer.git
 
-cd bank-transaction-analyzer
+{{{cd bank-transaction-analyzer}}}
 
 2. Install dependencies:
 
-pip install -r requirements.txt
+{{{pip install -r requirements.txt}}}
 
 3. Run the Streamlit app:
 
-streamlit run dashboard.py
+{{{streamlit run dashboard.py}}}
 
 - Data Source
 The current data is mock data generated using Faker for demonstration purposes.
