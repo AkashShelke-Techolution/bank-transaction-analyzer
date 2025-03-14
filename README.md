@@ -18,11 +18,11 @@ A simple yet insightful dashboard designed to help you analyze and visualize you
 
 ## Screenshots
 
-![Transactions Dashboard]
+
 <img width="376" alt="image" src="https://github.com/user-attachments/assets/aab2ae5f-ed67-44f3-89fe-66b5d4a430b0" />
 
 
-![Category Spending]
+
 <img width="563" alt="image" src="https://github.com/user-attachments/assets/c0011c2a-24b1-41da-a4c7-f189efdae563" />
 
 
@@ -55,23 +55,24 @@ To run this project locally:
 
 
 git clone https://github.com/oksanalim/bank-transaction-analyzer.git
-
-{{{cd bank-transaction-analyzer}}}
-
+```
+cd bank-transaction-analyzer
+```
 2. Install dependencies:
-
-{{{pip install -r requirements.txt}}}
-
+```
+pip install -r requirements.txt
+```
 3. Run the Streamlit app:
-
-{{{streamlit run dashboard.py}}}
-
-- Data Source
+```
+streamlit run dashboard.py
+```
+Data Source
 The current data is mock data generated using Faker for demonstration purposes.
 
 To generate your own transaction data, simply run:
+```
 python generate_mock_data.py
-
+```
 
 🤝 Contributing
 Feel free to fork this repository, submit issues, and send pull requests. Contributions are welcome!
