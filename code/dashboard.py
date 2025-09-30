@@ -9,7 +9,7 @@ CSV_URL = "https://raw.githubusercontent.com/oksanalim/bank-transaction-analyzer
 
 @st.cache_data
 def load_data():
-    """Loads transaction data from GitHub CSV."""
+    """Loads transaction data from GitHub CSV. """
     try:
         df = pd.read_csv(CSV_URL)
         df["transaction_date"] = pd.to_datetime(df["transaction_date"])
