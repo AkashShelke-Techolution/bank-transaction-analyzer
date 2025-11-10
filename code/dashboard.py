@@ -3,10 +3,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+// akash smart sync test
 # Define CSV source (replace with your actual GitHub raw URL)
 CSV_URL = "https://raw.githubusercontent.com/oksanalim/bank-transaction-analyzer/refs/heads/main/data/transactions.csv"
-//akash smart sync test
+
 @st.cache_data
 def load_data():
     """Loads transaction data from GitHub CSV akash modified updated for smartsync dev test ."""
