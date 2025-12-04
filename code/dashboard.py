@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-// akash smart sync test JITB fixes v.1
+// akash smart sync test PROD on 4th dec
 # Define CSV source (replace with your actual GitHub raw URL)
 CSV_URL = "https://raw.githubusercontent.com/oksanalim/bank-transaction-analyzer/refs/heads/main/data/transactions.csv"
 

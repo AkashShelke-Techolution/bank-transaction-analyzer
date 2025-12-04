@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 from faker import Faker
-// akash QA sync 1.1
+// akash smart sync test PROD on 4th dec
 fake = Faker()
 
 # Define category mapping (category_id → category_name)
